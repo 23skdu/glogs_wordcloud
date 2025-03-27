@@ -6,4 +6,5 @@ RUN apt update && apt -y upgrade \
     && apt install -y python3-dev gcc build-essential && apt-get clean \
     && pip3 install google-cloud-logging google-cloud-storage matplotlib wordcloud \
     && pip3 cache purge
+COPY glogs_wordcloud.py /bin
 CMD ["python","-c", "print('works')"]
