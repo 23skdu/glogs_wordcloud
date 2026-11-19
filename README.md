@@ -12,6 +12,10 @@ make setup
 uv run glogs-wordcloud PROJECT_ID LOG_NAME --num-entries 1000 --output-file out.png
 ```
 
+## Example
+
+![Example word cloud](docs/example-wordcloud.png)
+
 ## Repository layout
 
 - `src/glogs_wordcloud/` - Python package and CLI.
