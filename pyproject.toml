@@ -1,0 +1,114 @@
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "glogs-wordcloud"
+version = "0.1.0"
+description = "Fetch Google Cloud Logging entries, analyze word/phrase frequency, and render a word cloud."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+  { name = "23skdu", email = "23skdu@users.noreply.github.com" },
+]
+keywords = ["gcp", "google-cloud-logging", "wordcloud", "devsecops"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: Public Domain",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Logging",
+]
+dependencies = [
+  "google-cloud-logging>=3.11.0,<4.0.0",
+  "matplotlib>=3.9.0,<4.0.0",
+  "wordcloud>=1.9.3,<2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "bandit[toml]>=1.8.0,<2.0.0",
+  "detect-secrets>=1.5.0,<2.0.0",
+  "mypy>=1.13.0,<2.0.0",
+  "pip-audit>=2.8.0,<3.0.0",
+  "pre-commit>=4.0.0,<5.0.0",
+  "pytest>=9.0.3,<10.0.0",
+  "pytest-cov>=6.0.0,<7.0.0",
+  "ruff>=0.8.0,<1.0.0",
+]
+
+[project.scripts]
+glogs-wordcloud = "glogs_wordcloud.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/glogs_wordcloud"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+extend-exclude = [".venv", "dist", "build"]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "I", "B", "S", "UP", "N", "C4", "SIM", "RUF", "T20", "DTZ", "PTH",
+]
+ignore = [
+  "S101",  # asserts in tests
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+no_implicit_reexport = true
+namespace_packages = true
+mypy_path = "src"
+packages = ["glogs_wordcloud"]
+plugins = []
+
+[[tool.mypy.overrides]]
+module = ["google.*", "matplotlib.*", "wordcloud.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["glogs_wordcloud.gcp_logging"]
+disallow_untyped_calls = false
+warn_return_any = false
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+skips = []
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["src/glogs_wordcloud"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 70
+show_missing = true

@@ -1,0 +1,7 @@
+# Example remote backend configuration. Copy to backend.tf and adjust.
+# terraform {
+#   backend "gcs" {
+#     bucket = "your-tf-state-bucket"
+#     prefix = "glogs-wordcloud"
+#   }
+# }

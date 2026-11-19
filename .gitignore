@@ -172,3 +172,55 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# --- Project-specific ---
+
+# Virtual environments / tooling
+.venv/
+venv/
+.uv-cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+src/*.egg-info/
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/.terraform.lock.hcl
+infra/terraform/terraform.tfstate
+infra/terraform/terraform.tfstate.*
+infra/terraform/terraform.tfvars
+infra/terraform/*.tfvars
+!infra/terraform/terraform.tfvars.example
+infra/terraform/crash.log
+infra/terraform/override.tf
+infra/terraform/override.tf.json
+infra/terraform/*_override.tf
+infra/terraform/*_override.tf.json
+
+# Secrets and credentials
+*.json.key
+service-account*.json
+*-credentials.json
+.env
+.env.*
+!.env.example
+secrets/
+
+# Generated artifacts
+*.png
+*.jpg
+*.jpeg
+wordcloud*.png
+
+# Reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# OS
+.DS_Store
+Thumbs.db
