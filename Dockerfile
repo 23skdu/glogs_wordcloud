@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # Build stage
-FROM python:3.13.11-slim-bookworm AS builder
+FROM python:3.15.2-slim-bookworm AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -22,7 +22,7 @@ RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install .
 
 # Runtime stage
-FROM python:3.13.11-slim-bookworm AS runtime
+FROM python:3.15.2-slim-bookworm AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
