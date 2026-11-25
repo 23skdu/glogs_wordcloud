@@ -45,4 +45,4 @@ See `docs/security.md`. Never commit credentials or `terraform.tfvars`.
 
 ## License
 
-Public domain (Unlicense).
+This project is released into the public domain under the [Unlicense](https://unlicense.org). See [LICENSE](LICENSE) for details.
